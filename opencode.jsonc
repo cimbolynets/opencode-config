@@ -1,0 +1,139 @@
+{
+  // Quota 5 supports V2 and automatically loads its TUI component.
+  "plugins": [
+    "@slkiser/opencode-quota@5.0.2",
+  ],
+  "permissions": [
+    { "action": "websearch", "resource": "*", "effect": "allow" },
+    { "action": "shell", "resource": "*", "effect": "ask" },
+    { "action": "shell", "resource": "git push *", "effect": "deny" },
+    { "action": "shell", "resource": "git send-pack *", "effect": "deny" },
+    { "action": "shell", "resource": "git status*", "effect": "allow" },
+    { "action": "shell", "resource": "git diff*", "effect": "allow" },
+    { "action": "shell", "resource": "git show*", "effect": "allow" },
+    { "action": "shell", "resource": "git log*", "effect": "allow" },
+    { "action": "shell", "resource": "git blame*", "effect": "allow" },
+    { "action": "shell", "resource": "git ls-files*", "effect": "allow" },
+    { "action": "shell", "resource": "git ls-tree*", "effect": "allow" },
+    { "action": "shell", "resource": "git rev-parse*", "effect": "allow" },
+    { "action": "shell", "resource": "git grep*", "effect": "allow" },
+    { "action": "shell", "resource": "git shortlog*", "effect": "allow" },
+    { "action": "shell", "resource": "git describe*", "effect": "allow" },
+    { "action": "shell", "resource": "rg", "effect": "allow" },
+    { "action": "shell", "resource": "rg *", "effect": "allow" },
+    { "action": "shell", "resource": "grep", "effect": "allow" },
+    { "action": "shell", "resource": "grep *", "effect": "allow" },
+    { "action": "shell", "resource": "ls*", "effect": "allow" },
+    { "action": "shell", "resource": "pwd", "effect": "allow" },
+    { "action": "shell", "resource": "tree", "effect": "allow" },
+    { "action": "shell", "resource": "tree *", "effect": "allow" },
+    { "action": "shell", "resource": "file *", "effect": "allow" },
+    { "action": "shell", "resource": "stat *", "effect": "allow" },
+    { "action": "shell", "resource": "wc *", "effect": "allow" },
+    { "action": "shell", "resource": "which *", "effect": "allow" },
+    { "action": "shell", "resource": "command -v *", "effect": "allow" },
+    { "action": "shell", "resource": "realpath *", "effect": "allow" },
+    { "action": "shell", "resource": "dirname *", "effect": "allow" },
+    { "action": "shell", "resource": "basename *", "effect": "allow" },
+    { "action": "shell", "resource": "uname", "effect": "allow" },
+    { "action": "shell", "resource": "uname *", "effect": "allow" },
+    { "action": "shell", "resource": "whoami", "effect": "allow" },
+    { "action": "shell", "resource": "hostname", "effect": "allow" },
+    { "action": "shell", "resource": "diff *", "effect": "allow" },
+    { "action": "shell", "resource": "cmp *", "effect": "allow" },
+    { "action": "shell", "resource": "npm run*", "effect": "allow" },
+    { "action": "shell", "resource": "npm test*", "effect": "allow" },
+    { "action": "shell", "resource": "pnpm run*", "effect": "allow" },
+    { "action": "shell", "resource": "pnpm test*", "effect": "allow" },
+    { "action": "shell", "resource": "yarn run*", "effect": "allow" },
+    { "action": "shell", "resource": "yarn test*", "effect": "allow" },
+    { "action": "shell", "resource": "bun run*", "effect": "allow" },
+    { "action": "shell", "resource": "bun test*", "effect": "allow" },
+    { "action": "shell", "resource": "npx tsc", "effect": "allow" },
+    { "action": "shell", "resource": "npx tsc *", "effect": "allow" },
+    { "action": "shell", "resource": "npx eslint", "effect": "allow" },
+    { "action": "shell", "resource": "npx eslint *", "effect": "allow" },
+    { "action": "shell", "resource": "npx vitest", "effect": "allow" },
+    { "action": "shell", "resource": "npx vitest *", "effect": "allow" },
+    { "action": "shell", "resource": "npx jest", "effect": "allow" },
+    { "action": "shell", "resource": "npx jest *", "effect": "allow" },
+    { "action": "shell", "resource": "npx prettier --check*", "effect": "allow" },
+    { "action": "shell", "resource": "bunx --no-install tsc", "effect": "allow" },
+    { "action": "shell", "resource": "bunx --no-install tsc *", "effect": "allow" },
+    { "action": "shell", "resource": "bunx --no-install eslint", "effect": "allow" },
+    { "action": "shell", "resource": "bunx --no-install eslint *", "effect": "allow" },
+    { "action": "shell", "resource": "bunx --no-install vitest", "effect": "allow" },
+    { "action": "shell", "resource": "bunx --no-install vitest *", "effect": "allow" },
+    { "action": "shell", "resource": "bunx --no-install jest", "effect": "allow" },
+    { "action": "shell", "resource": "bunx --no-install jest *", "effect": "allow" },
+    { "action": "shell", "resource": "bunx --no-install prettier --check*", "effect": "allow" },
+  ],
+  "mcp": {
+    "servers": {
+      "playwright": {
+        "type": "local",
+        "command": ["npx", "@playwright/mcp@latest"],
+        "disabled": true,
+      },
+      "context": {
+        "type": "local",
+        "command": ["context-local", "serve"],
+        "disabled": true,
+      },
+    },
+  },
+  "agents": {
+    "builder": {
+      "model": "openai/gpt-6.1-sol#high",
+      "description": "Implements delegated coding tasks with full tool access",
+      "mode": "subagent",
+      "permissions": [
+        { "action": "read", "resource": "*", "effect": "allow" },
+        { "action": "edit", "resource": "*", "effect": "allow" },
+        { "action": "glob", "resource": "*", "effect": "allow" },
+        { "action": "grep", "resource": "*", "effect": "allow" },
+      ],
+    },
+
+    "build": {
+      "permissions": [
+        { "action": "subagent", "resource": "*", "effect": "deny" },
+        { "action": "subagent", "resource": "builder", "effect": "allow" },
+        { "action": "subagent", "resource": "explore", "effect": "allow" },
+        { "action": "subagent", "resource": "reviewer", "effect": "allow" },
+      ],
+    },
+
+    "plan": {
+      "permissions": [
+        { "action": "subagent", "resource": "*", "effect": "deny" },
+        { "action": "subagent", "resource": "explore", "effect": "allow" },
+        { "action": "subagent", "resource": "reviewer", "effect": "allow" },
+      ],
+    },
+
+    "general": {
+      "disabled": true,
+    },
+  },
+  "providers": {
+    "openai": {
+      "models": {
+        "gpt-6-astra": {
+          "limit": {
+            "context": 408000,
+            "input": 280000,
+            "output": 128000,
+          },
+        },
+        "gpt-6.1-sol": {
+          "limit": {
+            "context": 508000,
+            "input": 380000,
+            "output": 128000,
+          },
+        },
+      },
+    },
+  },
+}

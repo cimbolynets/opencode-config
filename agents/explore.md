@@ -1,5 +1,5 @@
 ---
-description: Performs fast, mechanical codebase discovery with a small model; use only to locate files, symbols, references, patterns, or straightforward call paths, never for code review or complex diagnosis
+description: Performs focused, mechanical codebase discovery; use only to locate files, symbols, references, patterns, or straightforward call paths, never for code review or complex diagnosis
 mode: subagent
 model: openai/gpt-6.1-sol
 request:
@@ -9,7 +9,6 @@ permissions:
   - { action: edit, resource: "*", effect: deny }
   - { action: subagent, resource: "*", effect: deny }
   - { action: "playwright_*", resource: "*", effect: deny }
-  - { action: "context_*", resource: "*", effect: deny }
   - { action: webfetch, resource: "*", effect: deny }
   - { action: websearch, resource: "*", effect: deny }
   - { action: todowrite, resource: "*", effect: deny }
@@ -35,6 +34,6 @@ Perform fast, read-only repository discovery and return concise factual results 
 - interpreting ambiguous behavior
 - judging correctness, risk, or test adequacy
 
-If the delegated request requires judgment rather than discovery, state that it should be handled by `reviewer` and return only any directly relevant locations already found.
+If the delegated request requires judgment rather than discovery, state that it should be handled by `general` and return only any directly relevant locations already found.
 
 Use glob, grep, and read before shell commands. Search only as broadly as needed and report conclusions as facts supported by paths and line references.

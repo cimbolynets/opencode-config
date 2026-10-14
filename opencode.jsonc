@@ -75,11 +75,6 @@
         "command": ["npx", "@playwright/mcp@latest"],
         "disabled": true,
       },
-      "context": {
-        "type": "local",
-        "command": ["context-local", "serve"],
-        "disabled": true,
-      },
     },
   },
   "agents": {
@@ -100,7 +95,7 @@
         { "action": "subagent", "resource": "*", "effect": "deny" },
         { "action": "subagent", "resource": "builder", "effect": "allow" },
         { "action": "subagent", "resource": "explore", "effect": "allow" },
-        { "action": "subagent", "resource": "reviewer", "effect": "allow" },
+        { "action": "subagent", "resource": "general", "effect": "allow" },
       ],
     },
 
@@ -108,13 +103,10 @@
       "permissions": [
         { "action": "subagent", "resource": "*", "effect": "deny" },
         { "action": "subagent", "resource": "explore", "effect": "allow" },
-        { "action": "subagent", "resource": "reviewer", "effect": "allow" },
+        { "action": "subagent", "resource": "general", "effect": "allow" },
       ],
     },
 
-    "general": {
-      "disabled": true,
-    },
   },
   "providers": {
     "openai": {

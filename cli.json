@@ -36,5 +36,8 @@
     "scope": "cwd",
     "mode": "off",
     "indicators": "status"
+  },
+  "scroll": {
+    "acceleration": false
   }
 }

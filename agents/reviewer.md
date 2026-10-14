@@ -1,7 +1,7 @@
 ---
 description: Performs high-judgment code review, bug diagnosis, architecture analysis, and read-only QA verification; use instead of explore when conclusions or risk assessment are required
 mode: subagent
-hidden: true
+hidden: false
 request:
   body:
     temperature: 0.2
